@@ -1,7 +1,7 @@
 
 import requests
 from bs4 import BeautifulSoup as bs
-from flask import Flask, jsonify
+from flask import Flask, jsonify,request
 
 app = Flask(__name__)
 
@@ -29,10 +29,9 @@ def findQuestion(problem_name):
     except:
         return "Question Not Found"
 
-@app.route('/<question>',methods=['GET'])
-def find(question):
-    return findQuestion(question)
-
-
+@app.route('/',methods=['GET'])
+def find():
+    questionName = str(request.args['question'])
+    return findQuestion(questionName)
 
 
